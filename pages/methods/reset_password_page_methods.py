@@ -1,19 +1,14 @@
 import allure
-from selenium.common import ElementClickInterceptedException
-from selenium.webdriver.common.by import By
-from pages.base_page import BasePage
+
 from selenium.webdriver.support import expected_conditions as EC
+from selenium.common import ElementClickInterceptedException
+
+from pages.locators.base_page_locators import BasePageLoc
+from pages.methods.base_page_methods import BasePageFunk
+from pages.locators.reset_password_page_lcoators import ResetPasswordPageLoc
 
 
-class ResetPasswordPage(BasePage):
-
-    FORGOT_PASSWORD_URL = 'https://stellarburgers.nomoreparties.site/reset-password'
-    EMAIL_INPUT = [By.XPATH, '//label[text()="Email"]/following-sibling::input']
-    RESET_BUTTON = [By.XPATH, '//button[text()="Восстановить"]']
-    RESET_PASSWORD_FORM_TITLE = [By.XPATH, '//h2[text()="Восстановление пароля"]']
-    PASSWORD_INPUT = [By.XPATH, '//label[text()="Пароль"]/following-sibling::input']
-    RESET_CODE_INPUT = [By.XPATH, '//label[text()="Введите код из письма"]']
-    HIDE_PASSWORD_BUTTON = [By.XPATH, '//div[@class="input__icon input__icon-action"]']
+class ResetPasswordPageFunk(BasePageFunk, BasePageLoc, ResetPasswordPageLoc):
 
     def __init__(self, driver):
 
@@ -22,7 +17,7 @@ class ResetPasswordPage(BasePage):
     @allure.step('Вводим email')
     def enter_email(self, email):
 
-        self.send_keys(self.EMAIL_INPUT, email)
+        self.driver.send_keys(self.EMAIL_INPUT, email)
 
     @allure.step('Открываем страницу восстановления пароля')
     def open_reset_password_page(self):

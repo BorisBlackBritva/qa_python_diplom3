@@ -1,17 +1,14 @@
 import allure
+
 from selenium.common import ElementClickInterceptedException
-from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
-from pages.base_page import BasePage
+
+from pages.locators.base_page_locators import BasePageLoc
+from pages.methods.base_page_methods import BasePageFunk
+from pages.locators.login_page_locators import LoginPageLoc
 
 
-class LoginPage(BasePage):
-
-    LOGIN_PAGE_URL = 'https://stellarburgers.nomoreparties.site/login'
-    FORGOT_PASSWORD_LINK = [By.XPATH, '//a[@href="/forgot-password"]']
-    EMAIL_INPUT = [By.XPATH, '//label[text()="Email"]/following-sibling::input']
-    PASSWORD_INPUT = [By.XPATH, '//label[text()="Пароль"]/following-sibling::input']
-    LOGIN_BUTTON = [By.XPATH, '//button[text()="Войти"]']
+class LoginPageFunk(BasePageFunk, BasePageLoc, LoginPageLoc):
 
     def __init__(self, driver):
 
@@ -40,8 +37,8 @@ class LoginPage(BasePage):
     def login_user(self, email, password):
 
         self.open_login_page()
-        self.send_keys(self.EMAIL_INPUT, email)
-        self.send_keys(self.PASSWORD_INPUT, password)
+        self.driver.send_keys(self.EMAIL_INPUT, email)
+        self.driver(self.PASSWORD_INPUT, password)
         max_attemps = 0
         while max_attemps <= 5:
             try:
