@@ -1,6 +1,4 @@
 from selenium.webdriver.common.by import By
-from pages.base_page_locators import BasePageLoc
-from pages.base_page_methods import BasePageFunk
 
 
 class GeneralPageLoc:

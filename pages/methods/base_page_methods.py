@@ -1,5 +1,6 @@
-from selenium.webdriver.common.by import By
 from selenium.webdriver.support.wait import WebDriverWait
+from selenium.common import ElementClickInterceptedException
+from selenium.webdriver.support import expected_conditions as EC
 
 
 class BasePageFunk:
@@ -10,18 +11,6 @@ class BasePageFunk:
 
     def wait(self, condition, locator):
         return WebDriverWait(self.driver, 10).until(condition(locator))
-
-    def click(self, locator):
-
-        self.driver.find_element(*locator).click()
-
-    def get(self, link):
-
-        self.driver.get(link)
-
-    def send_keys(self, locator, key):
-
-        self.find_element(locator).send_keys(key)
 
     def find_element(self, locator):
 
@@ -36,5 +25,13 @@ class BasePageFunk:
         elem = self.driver.find_element(*locator)
         return elem.get_attribute(attribute_name)
 
-    def send_keys(self, locator, key):
-        self.find_element(locator).send_keys(key)
+    def hard_click(self, condition_1, locator_1):
+
+        max_attemps = 0
+        while max_attemps <= 5:
+            try:
+                self.wait(condition_1, locator_1).click()
+                break
+            except ElementClickInterceptedException:
+                max_attemps += max_attemps
+                continue

@@ -1,6 +1,6 @@
 import allure
-from pages.login_page import LoginPage
-from pages.reset_password_page import ResetPasswordPage
+from pages.methods.login_page_methods import LoginPageFunk
+from pages.methods.reset_password_page_methods import ResetPasswordPageFunk
 from helpers.constants import Constants
 
 
@@ -11,8 +11,8 @@ class TestResetPassword:
     @allure.title('Проверка перехода на страницу восстановления пароля по ссылке на странице логина')
     def test_open_forgot_password_page_via_login_page_link(self):
 
-        login_page = LoginPage(self.driver)
-        reset_pass_page = ResetPasswordPage(self.driver)
+        login_page = LoginPageFunk(self.driver)
+        reset_pass_page = ResetPasswordPageFunk(self.driver)
 
         login_page.open_login_page()
         login_page.click_reset_password_link()
@@ -22,7 +22,7 @@ class TestResetPassword:
     @allure.title('Проверка подтверждения формы восстановления пароля')
     def test_complete_reset_pass_form(self):
 
-        reset_pass_page = ResetPasswordPage(self.driver)
+        reset_pass_page = ResetPasswordPageFunk(self.driver)
 
         reset_pass_page.open_reset_password_page()
         reset_pass_page.enter_email(self.const.EMAIL.get('reset_email'))
@@ -33,7 +33,7 @@ class TestResetPassword:
     @allure.title('Проверка скрытия пароля')
     def test_hide_password(self):
 
-        reset_pass_page = ResetPasswordPage(self.driver)
+        reset_pass_page = ResetPasswordPageFunk(self.driver)
 
         reset_pass_page.open_reset_password_page()
         reset_pass_page.enter_email(self.const.EMAIL.get('reset_email'))

@@ -17,35 +17,21 @@ class ResetPasswordPageFunk(BasePageFunk, BasePageLoc, ResetPasswordPageLoc):
     @allure.step('Вводим email')
     def enter_email(self, email):
 
-        self.send_keys(self.EMAIL_INPUT, email)
+        self.find_element(self.EMAIL_INPUT).send_keys(email)
 
     @allure.step('Открываем страницу восстановления пароля')
     def open_reset_password_page(self):
 
-        self.get(self.FORGOT_PASSWORD_URL)
+        self.driver.get(self.FORGOT_PASSWORD_URL)
         self.wait(EC.presence_of_element_located, self.RESET_PASSWORD_FORM_TITLE)
 
     @allure.step('Кликаем по кнопке восстановления пароля')
     def click_reset_button(self):
 
-        max_attemps = 0
-        while max_attemps <= 5:
-            try:
-                self.wait(EC.element_to_be_clickable, self.RESET_BUTTON).click()
-                break
-            except ElementClickInterceptedException:
-                max_attemps += max_attemps
-                continue
+        self.hard_click(EC.element_to_be_clickable, self.RESET_BUTTON)
         self.wait(EC.presence_of_element_located, self.RESET_CODE_INPUT)
 
     @allure.step('Кликаем по кнопке скрытия пароля')
     def click_hide_password_button(self):
 
-        max_attemps = 0
-        while max_attemps <= 5:
-            try:
-                self.wait(EC.element_to_be_clickable, self.HIDE_PASSWORD_BUTTON).click()
-                break
-            except ElementClickInterceptedException:
-                max_attemps += max_attemps
-                continue
+        self.hard_click(EC.element_to_be_clickable, self.HIDE_PASSWORD_BUTTON)

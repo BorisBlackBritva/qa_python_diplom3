@@ -17,38 +17,17 @@ class PersonalAccountPageFunk(BasePageFunk, BasePageLoc, PersonalAccountPageLoc)
     @allure.step('Кликаем "Профиль" в личном кабинете')
     def click_account_button(self):
 
-        max_attemps = 0
-        while max_attemps <= 5:
-            try:
-                self.wait(EC.element_to_be_clickable, self.PROFILE_BUTTON).click()
-                break
-            except ElementClickInterceptedException:
-                max_attemps += max_attemps
-                continue
+        self.hard_click(EC.element_to_be_clickable, self.PROFILE_BUTTON)
         self.wait(EC.presence_of_element_located, self.PROFILE_USER_DATA_FORM)
 
     @allure.step('Кликаем "История заказов" в личном кабинете')
     def click_order_history_button(self):
 
-        max_attemps = 0
-        while max_attemps <= 5:
-            try:
-                self.wait(EC.element_to_be_clickable, self.ORDER_HISTORY_BUTTON).click()
-                break
-            except ElementClickInterceptedException:
-                max_attemps += max_attemps
-                continue
+        self.hard_click(EC.element_to_be_clickable, self.ORDER_HISTORY_BUTTON)
         self.wait(EC.presence_of_element_located, self.ORDERS_BOARD)
 
     @allure.step('Кликаем "Выход" в личном кабинете')
     def click_exit_user_button(self):
 
-        max_attemps = 0
-        while max_attemps <= 5:
-            try:
-                self.wait(EC.element_to_be_clickable, self.EXIT_USER_BUTTON).click()
-                break
-            except ElementClickInterceptedException:
-                max_attemps += max_attemps
-                continue
+        self.hard_click(EC.element_to_be_clickable, self.EXIT_USER_BUTTON)
         self.wait(EC.presence_of_element_located, self.LOGIN_FORM_TITLE)

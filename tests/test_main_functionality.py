@@ -1,8 +1,8 @@
 import allure
-from pages.general_page import GeneralPage
-from pages.login_page import LoginPage
-from pages.base_page import BasePage
-from pages.personal_account_page import PersonalAccountPage
+from pages.methods.general_page_methods import GeneralPageFunk
+from pages.methods.login_page_methods import LoginPageFunk
+from pages.methods.base_page_methods import BasePageFunk
+from pages.methods.personal_account_page_methods import PersonalAccountPageFunk
 
 
 class TestMainFunctionality:
@@ -10,8 +10,8 @@ class TestMainFunctionality:
     @allure.title('Проверка перехода к конструктору')
     def test_open_constructor(self):
 
-        general_page = GeneralPage(self.driver)
-        base_page = BasePage(self.driver)
+        general_page = GeneralPageFunk(self.driver)
+        base_page = BasePageFunk(self.driver)
 
         general_page.open_main_page()
         general_page.click_constructor_button()
@@ -21,8 +21,8 @@ class TestMainFunctionality:
     @allure.title('Проверка перехода к доске заказов')
     def test_open_orders_board(self):
 
-        general_page = GeneralPage(self.driver)
-        base_page = BasePage(self.driver)
+        general_page = GeneralPageFunk(self.driver)
+        base_page = BasePageFunk(self.driver)
 
         general_page.open_main_page()
         general_page.click_order_board_button()
@@ -32,8 +32,8 @@ class TestMainFunctionality:
     @allure.title('Проверка открытия модального окна деталей ингредиента')
     def test_open_test_close_ingredients_details(self):
 
-        general_page = GeneralPage(self.driver)
-        base_page = BasePage(self.driver)
+        general_page = GeneralPageFunk(self.driver)
+        base_page = BasePageFunk(self.driver)
 
         general_page.open_main_page()
         general_page.open_ingredients_details_window()
@@ -42,8 +42,8 @@ class TestMainFunctionality:
 
     @allure.title('Проверка закрытия модального окна деталей ингредиента')
     def test_close_ingredients_details(self):
-        general_page = GeneralPage(self.driver)
-        base_page = BasePage(self.driver)
+        general_page = GeneralPageFunk(self.driver)
+        base_page = BasePageFunk(self.driver)
 
         general_page.open_main_page()
         general_page.open_ingredients_details_window()
@@ -54,8 +54,8 @@ class TestMainFunctionality:
     @allure.title('Проверка работы счетчика ингредиентов')
     def test_ingredient_counter(self):
 
-        general_page = GeneralPage(self.driver)
-        base_page = BasePage(self.driver)
+        general_page = GeneralPageFunk(self.driver)
+        base_page = BasePageFunk(self.driver)
 
         general_page.open_main_page()
         general_page.add_bun()
@@ -65,10 +65,10 @@ class TestMainFunctionality:
     @allure.title('Проверка создания заказа')
     def test_create_order(self, create_and_delete_user):
 
-        general_page = GeneralPage(self.driver)
-        base_page = BasePage(self.driver)
-        login_page = LoginPage(self.driver)
-        personal_acc_page = PersonalAccountPage(self.driver)
+        general_page = GeneralPageFunk(self.driver)
+        base_page = BasePageFunk(self.driver)
+        login_page = LoginPageFunk(self.driver)
+        personal_acc_page = PersonalAccountPageFunk(self.driver)
 
         login_page.login_user(self.user_credentials['email'], self.user_credentials['password'])
         general_page.create_order()

@@ -1,8 +1,8 @@
 import allure
-from pages.general_page import GeneralPage
-from pages.login_page import LoginPage
-from pages.base_page import BasePage
-from pages.personal_account_page import PersonalAccountPage
+from pages.methods.general_page_methods import GeneralPageFunk
+from pages.methods.login_page_methods import LoginPageFunk
+from pages.methods.base_page_methods import BasePageFunk
+from pages.methods.personal_account_page_methods import PersonalAccountPageFunk
 
 
 class TestOrdersDetails:
@@ -10,8 +10,8 @@ class TestOrdersDetails:
     @allure.title('Проверка закрытия модального окна деталей заказа')
     def test_open_order_details(self):
 
-        general_page = GeneralPage(self.driver)
-        base_page = BasePage(self.driver)
+        general_page = GeneralPageFunk(self.driver)
+        base_page = BasePageFunk(self.driver)
 
         general_page.open_main_page()
         general_page.click_order_board_button()
@@ -22,10 +22,10 @@ class TestOrdersDetails:
     @allure.title('Проверка наличия созданного заказа в истории и на борде')
     def test_synchronization_orders_in_history_board_and_orders_board(self, create_and_delete_user, create_order_for_user):
 
-        general_page = GeneralPage(self.driver)
-        login_page = LoginPage(self.driver)
-        base_page = BasePage(self.driver)
-        personal_acc_page = PersonalAccountPage(self.driver)
+        general_page = GeneralPageFunk(self.driver)
+        login_page = LoginPageFunk(self.driver)
+        base_page = BasePageFunk(self.driver)
+        personal_acc_page = PersonalAccountPageFunk(self.driver)
 
         login_page.login_user(self.user_credentials['email'], self.user_credentials['password'])
         general_page.click_personal_account_button()
@@ -43,9 +43,9 @@ class TestOrdersDetails:
     @allure.title('Проверка работы счетчика всех заказов')
     def test_general_order_counter(self, create_and_delete_user):
 
-        general_page = GeneralPage(self.driver)
-        base_page = BasePage(self.driver)
-        login_page = LoginPage(self.driver)
+        general_page = GeneralPageFunk(self.driver)
+        base_page = BasePageFunk(self.driver)
+        login_page = LoginPageFunk(self.driver)
 
         general_page.open_main_page()
         general_page.click_order_board_button()
@@ -63,9 +63,9 @@ class TestOrdersDetails:
     @allure.title('Проверка работы счетчика сегодняшних заказов')
     def test_today_order_counter(self, create_and_delete_user):
 
-        general_page = GeneralPage(self.driver)
-        base_page = BasePage(self.driver)
-        login_page = LoginPage(self.driver)
+        general_page = GeneralPageFunk(self.driver)
+        base_page = BasePageFunk(self.driver)
+        login_page = LoginPageFunk(self.driver)
 
         general_page.open_main_page()
         general_page.click_order_board_button()
@@ -83,9 +83,9 @@ class TestOrdersDetails:
     @allure.title('Проверка отображения номера созданного заказа в логе выполненных заказов')
     def test_appear_order_number_in_work_orders_log(self, create_and_delete_user):
 
-        general_page = GeneralPage(self.driver)
-        base_page = BasePage(self.driver)
-        login_page = LoginPage(self.driver)
+        general_page = GeneralPageFunk(self.driver)
+        base_page = BasePageFunk(self.driver)
+        login_page = LoginPageFunk(self.driver)
 
         login_page.login_user(self.user_credentials['email'], self.user_credentials['password'])
         created_order_number = general_page.create_order()
