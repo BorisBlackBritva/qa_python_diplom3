@@ -37,8 +37,8 @@ class LoginPageFunk(BasePageFunk, BasePageLoc, LoginPageLoc):
     def login_user(self, email, password):
 
         self.open_login_page()
-        self.driver.send_keys(self.EMAIL_INPUT, email)
-        self.driver(self.PASSWORD_INPUT, password)
+        self.send_keys(self.EMAIL_INPUT, email)
+        self.send_keys(self.PASSWORD_INPUT, password)
         max_attemps = 0
         while max_attemps <= 5:
             try:

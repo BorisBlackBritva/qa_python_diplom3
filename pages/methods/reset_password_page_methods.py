@@ -17,7 +17,7 @@ class ResetPasswordPageFunk(BasePageFunk, BasePageLoc, ResetPasswordPageLoc):
     @allure.step('Вводим email')
     def enter_email(self, email):
 
-        self.driver.send_keys(self.EMAIL_INPUT, email)
+        self.send_keys(self.EMAIL_INPUT, email)
 
     @allure.step('Открываем страницу восстановления пароля')
     def open_reset_password_page(self):
